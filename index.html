@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>It is ~ to... 구문으로 알아보는 MBTI 테스트</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        #container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 1.2em;
+            font-weight: normal;
+            margin-top: 0;
+            margin-bottom: 30px;
+            color: #7f8c8d;
+        }
+        .question-group {
+            margin-bottom: 30px;
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+        }
+        .question-group h3 {
+            color: #3498db;
+            margin-top: 0;
+        }
+        .question {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #ecf0f1;
+        }
+        .question p {
+            margin: 0;
+            font-weight: bold;
+        }
+        .vocabulary {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 5px;
+            padding-left: 10px;
+        }
+        .options {
+            margin-top: 8px;
+        }
+        .options label {
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #fff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e8f6fd;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+        #result h3 {
+            margin-top: 0;
+            font-size: 1.8em;
+            color: #2980b9;
+        }
+        #result p {
+            font-size: 1.1em;
+            color: #34495e;
+        }
+        #review-sentences {
+            margin-top: 20px;
+            text-align: left;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+        #review-sentences h4 {
+            margin-top: 0;
+            color: #3498db;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+        #review-sentences ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #review-sentences li {
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <h1>My Personality Test 📝</h1>
+        <h2>"It is ~ to..." 구문으로 알아보는 나의 MBTI!</h2>
+
+        <form id="mbti-form">
+            <div class="question-group">
+                <h3>[E] Extraversion / [I] Introversion</h3>
+                <div class="question" id="q1">
+                    <p>1. It is exciting to meet new people.</p>
+                    <div class="options">
+                        <label><input type="radio" name="q1" value="y" required> Yes</label>
+                        <label><input type="radio" name="q1" value="n"> No</label>
+                    </div>
+                </div>
+                <div class="question" id="q2">
+                    <p>2. It is enjoyable to have a wide circle of friends.</p>
+                     <div class="vocabulary">*circle of friends: 교우 관계, 친구들</div>
+                    <div class="options">
+                        <label><input type="radio" name="q2" value="y" required> Yes</label>
+                        <label><input type="radio" name="q2" value="n"> No</label>
+                    </div>
+                </div>
+                 <div class="question" id="q3">
+                    <p>3. It is tiring to be in a large group for a long time.</p>
+                    <div class="options">
+                        <label><input type="radio" name="q3" value="y" required> Yes</label>
+                        <label><input type="radio" name="q3" value="n"> No</label>
+                    </div>
+                </div>
+                <div class="question" id="q4">
+                    <p>4. It is better to think things through on my own before talking to others.</p>
+                    <div class="vocabulary">*think through: 충분히 생각하다</div>
+                    <div class="options">
+                        <label><input type="radio" name="q4" value="y" required> Yes</label>
+                        <label><input type="radio" name="q4" value="n"> No</label>
+                    </div>
+                </div>
+                 <div class="question" id="q5">
+                    <p>5. It is fun to be the center of attention.</p>
+                    <div class="vocabulary">*attention: 주목, 관심</div>
+                    <div class="options">
+                        <label><input type="radio" name="q5" value="y" required> Yes</label>
+                        <label><input type="radio" name="q5" value="n"> No</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <h3>[S] Sensing / [N] Intuition</h3>
+                <div class="question" id="q6">
+                    <p>6. It is important to focus on the details of a project.</p>
+                    <div class="options">
+                        <label><input type="radio" name="q6" value="y" required> Yes</label>
+                        <label><input type="radio" name="q6" value="n"> No</label>
+                    </div>
+                </div>
+                 <div class="question" id="q7">
+                    <p>7. It is practical to trust my past experiences when making decisions.</p>
+                    <div class="vocabulary">*practical: 현실적인, 실용적인 *experience: 경험</div>
+                    <div class="options">
+                        <label><input type="radio" name="q7" value="y" required> Yes</label>
+                        <label><input type="radio" name="q7" value="n"> No</label>
+                    </div>
+                </div>
+                <div class="question" id="q8">
+                    <p>8. It is more interesting to think about future possibilities than present realities.</p>
+                    <div class="vocabulary">*possibility: 가능성 *reality: 현실</div>
+                    <div class="options">
+                        <label><input type="radio" name="q8" value="y" required> Yes</label>
+                        <label><input type="radio" name="q8" value="n"> No</label>
+                    </div>
+                </div>
+                <div class="question" id="q9">
+                    <p>9. It is easy for me to see the big picture and connect different ideas.</p>
+                    <div class="vocabulary">*see the big picture: 전체적인 상황을 보다, 숲을 보다</div>
+                    <div class="options">
+                        <label><input type="radio" name="q9" value="y" required> Yes</label>
+                        <label><input type="radio" name="q9" value="n"> No</label>
+                    </div>
+                </div>
+                <div class="question" id="q10">
+                    <p>10. It is satisfying to follow a clear and proven method.</p>
+                    <div class="vocabulary">*proven: 증명된, 입증된 *method: 방법</div>
+                    <div class="options">
+                        <label><input type="radio" name="q10" value="y" required> Yes</label>
+                        <label><input type="radio" name="q10" value="n"> No</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <h3>[T] Thinking / [F] Feeling</h3>
+                <div class="question" id="q11">
+                    <p>11. It is crucial to make decisions based on logic and reason.</p>
+                     <div class="vocabulary">*crucial: 매우 중요한 *logic: 논리 *reason: 이성</div>
+                    <div class="options">
+                        <label><input type="radio" name="q11" value="y" required> Yes</label>
+                        <label><input type="radio" name="q11" value="n"> No</label>
+                    </div>
+                </div>
+                <div class="question" id="q12">
+                    <p>12. It is necessary to be honest, even if it might hurt someone's feelings.</p>
+                     <div class="vocabulary">*necessary: 필요한 *honest: 솔직한</div>
+                    <div class="options">
+                        <label><input type="radio" name="q12" value="y" required> Yes</label>
+                        <label><input type="radio" name="q12" value="n"> No</label>
+                    </div>
+                </div>
+                <div class="question" id="q13">
+                    <p>13. It is important to consider how my decisions will affect others' feelings.</p>
+                    <div class="vocabulary">*consider: 고려하다 *affect: 영향을 미치다</div>
+                    <div class="options">
+                        <label><input type="radio" name="q13" value="y" required> Yes</label>
+                        <label><input type="radio" name="q13" value="n"> No</label>
+                    </div>
+                </div>
+                <div class="question" id="q14">
+                    <p>14. It is natural for me to empathize with how other people are feeling.</p>
+                    <div class="vocabulary">*natural: 자연스러운 *empathize: 공감하다</div>
+                    <div class="options">
+                        <label><input type="radio" name="q14" value="y" required> Yes</label>
+                        <label><input type="radio" name="q14" value="n"> No</label>
+                    </div>
+                </div>
+                <div class="question" id="q15">
+                    <p>15. It is better to be fair to everyone than to make exceptions for individuals.</p>
+                    <div class="vocabulary">*fair: 공정한 *exception: 예외 *individual: 개인</div>
+                    <div class="options">
+                        <label><input type="radio" name="q15" value="y" required> Yes</label>
+                        <label><input type="radio" name="q15" value="n"> No</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-group">
+                <h3>[J] Judging / [P] Perceiving</h3>
+                 <div class="question" id="q16">
+                    <p>16. It is satisfying to have a clear schedule and a to-do list.</p>
+                    <div class="vocabulary">*schedule: 일정</div>
+                    <div class="options">
+                        <label><input type="radio" name="q16" value="y" required> Yes</label>
+                        <label><input type="radio" name="q16" value="n"> No</label>
+                    </div>
+                </div>
+                <div class="question" id="q17">
+                    <p>17. It is stressful to have my plans suddenly change.</p>
+                    <div class="options">
+                        <label><input type="radio" name="q17" value="y" required> Yes</label>
+                        <label><input type="radio" name="q17" value="n"> No</label>
+                    </div>
+                </div>
+                <div class="question" id="q18">
+                    <p>18. It is enjoyable to keep my options open and be spontaneous.</p>
+                    <div class="vocabulary">*keep one's options open: 가능성을 열어두다 *spontaneous: 즉흥적인</div>
+                    <div class="options">
+                        <label><input type="radio" name="q18" value="y" required> Yes</label>
+                        <label><input type="radio" name="q18" value="n"> No</label>
+                    </div>
+                </div>
+                <div class="question" id="q19">
+                    <p>19. It is boring to do the same thing every day.</p>
+                    <div class="options">
+                        <label><input type="radio" name="q19" value="y" required> Yes</label>
+                        <label><input type="radio" name="q19" value="n"> No</label>
+                    </div>
+                </div>
+                <div class="question" id="q20">
+                    <p>20. It is important to finish one project before starting another.</p>
+                    <div class="options">
+                        <label><input type="radio" name="q20" value="y" required> Yes</label>
+                        <label><input type="radio" name="q20" value="n"> No</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit">Check Result</button>
+        </form>
+
+        <div id="result">
+            <h3 id="result-type"></h3>
+            <p id="result-description"></p>
+            <div id="review-sentences">
+                <h4>📌 My Characteristic Sentences</h4>
+                <ul id="sentence-list"></ul>
+            </div>
+            <p style="font-size:0.8em; color:#7f8c8d; margin-top: 20px;">*이 테스트는 'It is ~ to...' 구문 학습을 위한 간단한 테스트이며, 실제 MBTI 검사와는 차이가 있을 수 있습니다.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('mbti-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const answers = {};
+            for (let [key, value] of formData.entries()) {
+                answers[key] = value;
+            }
+
+            let mbtiType = '';
+
+            // E/I
+            let eiScore = 0;
+            if (answers.q1 === 'y') eiScore++; 
+            if (answers.q2 === 'y') eiScore++;
+            if (answers.q3 === 'y') eiScore--; 
+            if (answers.q4 === 'y') eiScore--; 
+            if (answers.q5 === 'y') eiScore++;
+            mbtiType += (eiScore > 0) ? 'E' : 'I';
+
+            // S/N
+            let snScore = 0;
+            if (answers.q6 === 'y') snScore++;
+            if (answers.q7 === 'y') snScore++;
+            if (answers.q8 === 'y') snScore--;
+            if (answers.q9 === 'y') snScore--;
+            if (answers.q10 === 'y') snScore++;
+            mbtiType += (snScore > 0) ? 'S' : 'N';
+
+            // T/F
+            let tfScore = 0;
+            if (answers.q11 === 'y') tfScore++;
+            if (answers.q12 === 'y') tfScore++;
+            if (answers.q13 === 'y') tfScore--;
+            if (answers.q14 === 'y') tfScore--;
+            if (answers.q15 === 'y') tfScore++;
+            mbtiType += (tfScore > 0) ? 'T' : 'F';
+
+            // J/P
+            let jpScore = 0;
+            if (answers.q16 === 'y') jpScore++;
+            if (answers.q17 === 'y') jpScore++;
+            if (answers.q18 === 'y') jpScore--;
+            if (answers.q19 === 'y') jpScore--;
+            if (answers.q20 === 'y') jpScore++;
+            mbtiType += (jpScore > 0) ? 'J' : 'P';
+            
+            const descriptions = {
+                "ISTJ": "책임감이 강하고 현실적인 '세상의 소금형'", "ISFJ": "헌신적이고 섬세하며 따뜻한 '임금 뒷편의 권력형'", "INFJ": "통찰력과 영감을 지닌 '예언자형'", "INTJ": "독창적이고 논리적인 '과학자형'",
+                "ISTP": "논리적이고 실용적인 '백과사전형'", "ISFP": "겸손하고 온화하며 삶의 여유를 즐기는 '성인군자형'", "INFP": "이상주의적이며 따뜻한 마음을 지닌 '잔다르크형'", "INTP": "지적 호기심이 많고 논리적인 '아이디어 뱅크형'",
+                "ESTP": "현실적이고 관용적인 문제 해결사 '수완좋은 활동가형'", "ESFP": "사교적이고 자유로운 영혼의 '사교적인 유형'", "ENFP": "열정적이고 창의적인 '스파크형'", "ENTP": "민첩하고 독창적인 발명가 '발명가형'",
+                "ESTJ": "체계적이고 현실적인 '사업가형'", "ESFJ": "친절하고 사교적인 '친선도모형'", "ENFJ": "타인의 성장을 돕는 언변능숙한 '지도자형'", "ENTJ": "결단력 있고 지도력 있는 '지도자형'"
+            };
+
+            const characteristicSentences = {
+                "ISTJ": ["It is important to follow the rules.", "It is logical to make a detailed plan.", "It is reliable to use proven methods.", "It is practical to focus on facts.", "It is satisfying to complete tasks on time."],
+                "ISFJ": ["It is important to help others in need.", "It is kind to remember small details about people.", "It is comforting to maintain traditions.", "It is valuable to be a good listener.", "It is meaningful to be loyal to your friends."],
+                "INFJ": ["It is inspiring to imagine a better future.", "It is meaningful to understand deep connections.", "It is important to live by your values.", "It is fulfilling to help others realize their potential.", "It is natural to seek harmony in relationships."],
+                "INTJ": ["It is logical to question everything.", "It is efficient to improve systems.", "It is exciting to solve complex problems.", "It is important to have a long-term vision.", "It is better to be competent than popular."],
+                "ISTP": ["It is interesting to understand how things work.", "It is practical to solve problems as they arise.", "It is exciting to take calculated risks.", "It is better to be independent and self-reliant.", "It is logical to stay calm in a crisis."],
+                "ISFP": ["It is wonderful to appreciate the beauty around you.", "It is important to be true to yourself.", "It is enjoyable to live in the moment.", "It is kind to avoid conflicts.", "It is freeing to have your own space."],
+                "INFP": ["It is important to find your true purpose.", "It is beautiful to imagine a perfect world.", "It is meaningful to express your feelings through art.", "It is crucial to stay true to your ideals.", "It is compassionate to help the underdog."],
+                "INTP": ["It is fascinating to explore abstract ideas.", "It is logical to analyze problems from all angles.", "It is exciting to learn something new.", "It is important to be precise in your thinking.", "It is better to be correct than to be popular."],
+                "ESTP": ["It is exciting to jump into new activities.", "It is fun to be spontaneous and flexible.", "It is practical to focus on immediate results.", "It is enjoyable to be at the center of the action.", "It is easy to adapt to new situations."],
+                "ESFP": ["It is fun to entertain people.", "It is exciting to experience new things.", "It is enjoyable to be with a group of friends.", "It is great to make others laugh.", "It is better to be optimistic and cheerful."],
+                "ENFP": ["It is exciting to start new projects.", "It is fun to explore creative possibilities.", "It is inspiring to connect with people on a deep level.", "It is easy to see the potential in others.", "It is important to follow your passions."],
+                "ENTP": ["It is fun to debate interesting ideas.", "It is exciting to challenge the status quo.", "It is clever to find new solutions to old problems.", "It is easy to see many possibilities.", "It is stimulating to engage in witty conversations."],
+                "ESTJ": ["It is efficient to organize people and resources.", "It is important to uphold traditions and standards.", "It is logical to follow a clear set of rules.", "It is responsible to get the job done right.", "It is practical to make decisions quickly."],
+                "ESFJ": ["It is important to create a harmonious environment.", "It is enjoyable to help and support your friends.", "It is nice to be part of a community.", "It is considerate to notice what others need.", "It is satisfying to organize social events."],
+                "ENFJ": ["It is inspiring to motivate others to achieve their goals.", "It is fulfilling to see the best in people.", "It is important to build strong relationships.", "It is natural to lead and guide others.", "It is rewarding to make a positive impact on the community."],
+                "ENTJ": ["It is effective to take charge and lead.", "It is logical to set ambitious goals.", "It is important to be decisive and confident.", "It is strategic to plan for the future.", "It is efficient to find the best way to do things."]
+            };
+
+            const resultDiv = document.getElementById('result');
+            document.getElementById('result-type').textContent = `Your MBTI type is ${mbtiType}!`;
+            document.getElementById('result-description').textContent = descriptions[mbtiType];
+            
+            const sentenceList = document.getElementById('sentence-list');
+            sentenceList.innerHTML = ''; // 기존 목록 초기화
+            characteristicSentences[mbtiType].forEach(sentence => {
+                const li = document.createElement('li');
+                li.textContent = `▶ ${sentence}`;
+                sentenceList.appendChild(li);
+            });
+
+            resultDiv.style.display = 'block';
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+
+</body>
+</html>
